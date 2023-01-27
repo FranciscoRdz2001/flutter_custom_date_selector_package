@@ -8,6 +8,8 @@ class CustomDatePicker extends StatefulWidget {
   final String title;
   final String? value;
   final Color iconsColor;
+  final String locale;
+  final String calendarTitle;
   final void Function(DateTime date) onNewDate;
   const CustomDatePicker({
     super.key,
@@ -15,6 +17,8 @@ class CustomDatePicker extends StatefulWidget {
     required this.title,
     required this.iconsColor,
     required this.onNewDate,
+    required this.locale,
+    required this.calendarTitle,
     this.value,
   });
 
@@ -93,6 +97,8 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
               firstDate: DateTime.now(),
               endDate: DateTime.now(),
               onChangesInDate: widget.onNewDate,
+              locale: widget.locale,
+              title: widget.calendarTitle,
             ),
           ),
         ),

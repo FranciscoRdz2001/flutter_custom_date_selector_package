@@ -46,9 +46,11 @@ class MyHomePage extends StatelessWidget {
                   ),
                   child: CustomDatePicker(
                     icon: Icons.date_range_rounded,
-                    title: 'Start Date',
-                    value: 'Test date',
+                    calendarTitle: 'Selecciona la fecha',
+                    title: 'Fecha inicial',
+                    value: 'Pruebas del widget de fecha',
                     iconsColor: Colors.blue,
+                    locale: 'es',
                     onNewDate: (date) {
                       date = date;
                     },

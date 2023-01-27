@@ -6,7 +6,8 @@ import 'custom_date_container_widget.dart';
 class CustomScrolleableCalendarWidget extends StatelessWidget {
   final DateTime firstDate;
   final DateTime endDate;
-
+  final String locale;
+  final String title;
   final void Function(DateTime date) onChangesInDate;
 
   const CustomScrolleableCalendarWidget({
@@ -14,6 +15,8 @@ class CustomScrolleableCalendarWidget extends StatelessWidget {
     required this.firstDate,
     required this.endDate,
     required this.onChangesInDate,
+    required this.title,
+    required this.locale,
   });
 
   @override
@@ -31,9 +34,9 @@ class CustomScrolleableCalendarWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        const Text(
-          'Select your date',
-          style: TextStyle(
+        Text(
+          title,
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
@@ -49,14 +52,17 @@ class CustomScrolleableCalendarWidget extends StatelessWidget {
             );
           },
           builder: (currentElement, isSelected, index) {
+            final month = DateFormat('MMMM', 'es').format(
+              DateTime(
+                DateTime.now().year,
+                currentElement,
+              ),
+            );
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  DateFormat('MMMM').format(DateTime(
-                    DateTime.now().year,
-                    currentElement,
-                  )),
+                  month[0].toUpperCase() + month.substring(1),
                   style: isSelected
                       ? const TextStyle(
                           fontSize: 16,
@@ -69,8 +75,7 @@ class CustomScrolleableCalendarWidget extends StatelessWidget {
                         ),
                 ),
                 const SizedBox(height: 5),
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 250),
+                Container(
                   height: 5,
                   width: 20,
                   decoration: BoxDecoration(
@@ -124,7 +129,7 @@ class CustomScrolleableCalendarWidget extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          DateFormat('EEEE')
+                          DateFormat("EEEE", 'es')
                               .format(
                                 DateTime(
                                   DateTime.now().year,
